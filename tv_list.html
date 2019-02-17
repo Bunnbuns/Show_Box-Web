@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>TV Shows</title>
+<style>
+body{
+	font-family:arial;
+}
+a{
+	text-decoration:none;
+}
+#list img{
+	width:100px;
+}
+#list .movie{
+	width:100px;
+	display:inline-block;
+	margin-bottom:.5rem;
+}
+#list h5{
+	color:rgba(15,15,15,1.0);
+	text-overflow: ellipsis;
+	margin:.5rem 0;
+}
+</style>
+</head>
+<body>
+<div id="list"></div>
+<script>
+var xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange = function() {
+    if (this.status == 200 || this.status == 302) {
+//go ahead and do stuff:
+    var tmp = JSON.parse(xhttp.responseText);
+       
+    for (var i = 0; i < 20; i++){
+  document.getElementById("list").innerHTML = document
+      .getElementById("list")
+      .innerHTML.concat('<a href="https://dev.benworld.net/sbrapi.cc/local/tv_show.html?id='+tmp[i].id+'"><div class="movie"><h5>'+tmp[i].title+'</h5><img id="poster" style="max-width:100%;" src="'+tmp[i].poster+'"></div></a>');
+    }
+
+    }
+};
+xhttp.open("GET", "https://dev.benworld.net/sbrapi.cc/api/serials/tv_list/", true);
+xhttp.send();
+
+		
+</script>
+</body>
+</html>

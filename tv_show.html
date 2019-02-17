@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>TV Show</title>
+<style>
+body{
+	font-family:arial;
+}
+a{
+	text-decoration:none;
+}
+#list img{
+	width:150px;
+}
+#list .ep{
+	width:150px;
+	display:inline-block;
+	margin-bottom:.5rem;
+}
+#list h5{
+	color:rgba(15,15,15,1.0);
+	text-overflow: ellipsis;
+	margin:.5rem 0;
+}
+#seasons{
+	display:inline-block;
+    vertical-align:middle;
+}
+.stats{
+	margin-bottom:.75rem;
+}
+</style>
+</head>
+<body>
+<h2 id="title">Loading...</h2>
+<span>
+	IMDb id: <a id="imdb_id" href="" target="_blank"></a>
+</span>
+<p id="desc">Loading...</p>
+<div class="stats">
+  <hr /><h4 style="margin:.3rem;display:inline-block;float:right;vertical-align:middle;"><select id="seasons" onchange="goSeason(this.value)">?</select></h4>
+  <h4 style="margin:.3rem;display:inline-block;vertical-align:middle;">Episodes</h4>
+</div>
+<div id="list">
+</div>
+<hr />
+<script>
+// --- Set vars --- //
+var id = getAllUrlParams().id;
+var season = "1";
+//season = getAllUrlParams().season;
+var seasons = "";
+var eps ="";
+var titles="";
+window.onload = function() {
+    xhttp.send();
+}
+// start making requests //
+var xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange = function() {
+    if (this.status == 200 || this.status == 302) {
+//go ahead and do stuff:
+    var tmp = JSON.parse(xhttp.responseText);
+  document.getElementById("desc").innerHTML = tmp.description;
+  document.getElementById("imdb_id").innerHTML = tmp.imdb_id;
+  document.getElementById("imdb_id").href = 'https://www.imdb.com/title/'+tmp.imdb_id;
+  document.getElementById("seasons").selectedIndex = tmp.season;
+  //document.getElementById("seasons").innerHTML = tmp.seasons[0];
+
+//    for(var key in tmp.seasons) {
+//        seasons += "<option value="+tmp.seasons[key]+">" +tmp.seasons[key]+ "</option>"
+//    }
+//    document.getElementById("seasons").innerHTML = seasons;
+
+    titles = Object.keys(tmp.titles).length;
+    for(var i = 1; i < titles+1; i++) {
+          //eps += i+'<br />';
+          eps += '<div class="ep"><h5>['+i+'] '+tmp.titles[i]+'</h5><!--<img id="poster" style="max-width:100%;" src="'+tmp.thumbs[i]+'"></div>-->';
+        }
+      document.getElementById("list").innerHTML = eps;
+
+    }//end of request
+};
+xhttp.open("GET", "https://dev.benworld.net/sbrapi.cc/api/serials/es/?id="+id+"&season="+season, true);
+
+
+
+
+
+
+
+// --- Functions --- //
+function goSeason(value){
+    window.location.href ='tv_show.html?id='+id+'&season='+value;
+}
+function getAllUrlParams(url) {
+	var queryString = url ? url.split('?')[1] : window.location.search.slice(1);
+	var obj = {};
+	if (queryString) {
+		queryString = queryString.split('#')[0];
+		var arr = queryString.split('&');
+		for (var i = 0; i < arr.length; i++) {
+			var a = arr[i].split('=');
+			var paramNum = undefined;
+			var paramName = a[0].replace(/\[\d*\]/, function (v) {
+				paramNum = v.slice(1, -1);
+				return '';
+			});
+			var paramValue = typeof (a[1]) === 'undefined' ? true : a[1];
+			paramName = paramName;
+			paramValue = paramValue;
+			if (obj[paramName]) {
+				if (typeof obj[paramName] === 'string') {
+					obj[paramName] = [obj[paramName]];
+				}
+				if (typeof paramNum === 'undefined') {
+					obj[paramName].push(paramValue);
+				}
+				else {
+					obj[paramName][paramNum] = paramValue;
+				}
+			}
+			else {
+				obj[paramName] = paramValue;
+			}
+		}
+	}
+	return obj;
+}
+</script>
+</body>
+</html>
