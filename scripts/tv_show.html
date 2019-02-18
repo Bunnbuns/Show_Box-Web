@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>TV Show</title>
+<style>
+body{
+	font-family:arial;
+}
+a{
+	text-decoration:none;
+}
+#list img{
+	width:150px;
+}
+#list .ep{
+	width:150px;
+	display:inline-block;
+	margin-bottom:.5rem;
+}
+#list h5{
+	color:rgba(15,15,15,1.0);
+	text-overflow: ellipsis;
+	margin:.5rem 0;
+}
+#seasons{
+	display:inline-block;
+    vertical-align:middle;
+}
+.stats{
+	margin-bottom:.75rem;
+}
+</style>
+</head>
+<body>
+<h2 id="title">Title</h2>
+<span>
+	IMDb id: <a id="imdb_id" href="" target="_blank"></a>
+</span>
+<p id="desc">Loading...</p>
+<div class="stats">
+  <hr /><h4 style="margin:.3rem;display:inline-block;float:right;vertical-align:middle;"><select id="seasons" onchange="goSeason(this.value)">?</select></h4>
+  <h4 style="margin:.3rem;display:inline-block;vertical-align:middle;">Episodes</h4>
+</div>
+<div id="list">
+</div>
+<hr />
+<script src="scripts/global.js"></script>
+<script src="scripts/tv_show.js"></script>
+</body>
+</html>
