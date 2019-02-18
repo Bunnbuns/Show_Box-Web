@@ -19,7 +19,7 @@ xhttp.onreadystatechange = function() {
 
     }
 };
-xhttp.open("GET", "https://dev.benworld.net/sbrapi.cc/api/serials/movie_list/?", true);
+xhttp.open("GET", "https://dev.benworld.net/sbrapi.cc/api/serials/movies_list/?", true);
 xhttp.send();
 
 var more = new XMLHttpRequest();
@@ -36,7 +36,7 @@ more.onreadystatechange = function() {
 
         }
 };
-more.open("GET", "https://dev.benworld.net/sbrapi.cc/api/serials/movie_list/?", true);
+more.open("GET", "https://dev.benworld.net/sbrapi.cc/api/serials/movies_list/?", true);
 
 
 // --- Functions --- //
