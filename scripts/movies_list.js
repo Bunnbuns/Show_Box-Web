@@ -1,4 +1,4 @@
-//tv_list.js
+//movies_list.js
 
 // --- Set vars --- //
 
