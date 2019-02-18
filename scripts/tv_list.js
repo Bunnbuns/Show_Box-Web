@@ -14,7 +14,7 @@ xhttp.onreadystatechange = function() {
         
     var tmp = JSON.parse(xhttp.responseText);
     for (var i = 0; i < 35; i++){
-            document.getElementById("list").innerHTML = document.getElementById("list").innerHTML.concat('<a href="https://dev.benworld.net/sbrapi.cc/local/tv_show.html?id='+tmp[i].id+'"><div class="movie"><h5>'+tmp[i].title+'</h5><img id="poster" style="max-width:100%;" src="'+tmp[i].poster+'"></div></a>');
+            document.getElementById("list").innerHTML = document.getElementById("list").innerHTML.concat('<a href="tv_show.html?id='+tmp[i].id+'"><div class="movie"><h5>'+tmp[i].title+'</h5><img id="poster" style="max-width:100%;" src="'+tmp[i].poster+'"></div></a>');
         }
 
     }
