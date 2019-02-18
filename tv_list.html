@@ -25,26 +25,9 @@ a{
 </style>
 </head>
 <body>
-<div id="list"></div>
-<script>
-var xhttp = new XMLHttpRequest();
-xhttp.onreadystatechange = function() {
-    if (this.status == 200 || this.status == 302) {
-//go ahead and do stuff:
-    var tmp = JSON.parse(xhttp.responseText);
-       
-    for (var i = 0; i < 20; i++){
-  document.getElementById("list").innerHTML = document
-      .getElementById("list")
-      .innerHTML.concat('<a href="https://dev.benworld.net/sbrapi.cc/local/tv_show.html?id='+tmp[i].id+'"><div class="movie"><h5>'+tmp[i].title+'</h5><img id="poster" style="max-width:100%;" src="'+tmp[i].poster+'"></div></a>');
-    }
-
-    }
-};
-xhttp.open("GET", "https://dev.benworld.net/sbrapi.cc/api/serials/tv_list/", true);
-xhttp.send();
-
-		
-</script>
+<div id="list"><h1>Loading...</h1></div>
+<button onclick="loadMore()">List All</button>
+<script src="scripts/tv_list.js"></script>
+<script src="scripts/global.js"></script>
 </body>
 </html>
