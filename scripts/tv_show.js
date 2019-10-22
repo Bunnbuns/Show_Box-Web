@@ -9,7 +9,6 @@ var eps ="";
 var titles="";
 window.onload = function() {
     //window is loaded, send requests
-    xhttp.send();
 }
 // start making requests //
 var xhttp = new XMLHttpRequest();
@@ -28,18 +27,16 @@ xhttp.onreadystatechange = function() {
     }
     document.getElementById("seasons").innerHTML = seasons;
 
-    titles = Object.keys(tmp.titles).length;
-    for(var i = 1; i < titles+1; i++) {
+    var episodeNum = Object.keys(tmp.titles).length;
+    document.getElementById("list").innerHTML = "";
+    for(var i = 1; i < episodeNum+1; i++) {
           //eps += i+'<br />';
-          eps += '<div class="ep"><h5>['+i+'] '+tmp.titles[i]+'</h5><img id="poster" style="max-width:100%;" src="'+tmp.thumbs[i]+'"></div>';
+          document.getElementById("list").innerHTML += '<div class="ep"><h5>['+i+'] '+tmp.titles[i]+'</h5><img id="poster" style="max-width:100%;" src="'+tmp.thumbs[i]+'"></div>';
         }
-      document.getElementById("list").innerHTML = eps;
-
     }//end of request
 };
 xhttp.open("GET", "https://dev.benworld.net/sbrapi.cc/api/serials/es/?id="+id+"&season="+season, true);
-
-
+xhttp.send();
 
 
 
